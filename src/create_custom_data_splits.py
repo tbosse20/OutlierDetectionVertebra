@@ -1,10 +1,12 @@
-import numpy as np
-import os
 import argparse
-from dtu_spine_config import DTUConfig
+import os
 import random
 from pathlib import Path
 from shutil import copyfile
+
+import numpy as np
+
+from dtu_spine_config import DTUConfig
 
 
 def copy_file_lists(settings):
@@ -26,10 +28,16 @@ def copy_file_lists(settings):
 
 
 def create_custom_data_splits(settings):
-    train_size = 100
-    validation_size = 100
+    # train_size = 150
+    # validation_size = 100
+    N = 546
+    train_ratio = 0.8
+    train_size = int(train_ratio * N)
+    validation_size = N - train_size
     # How many of the validation samples are outliers
-    outlier_size = 50
+    # outlier_size = 50
+    outlier_ratio = 0.5
+    outlier_size = int(outlier_ratio * validation_size)
 
     result_dir = settings["result_dir"]
     training_list = settings["data_set"]
@@ -65,13 +73,15 @@ def create_custom_data_splits(settings):
 
     f = open(validation_out, "w")
     idx = 0
-    for samp in validation_samples:
+    for idx, samp in enumerate(validation_samples):
         if idx < outlier_size:
-            ot = random.randint(0, len(outlier_types) - 1)
-            f.write(f"{samp},{outlier_types[ot]}\n")
+            # ot = random.randint(0, len(outlier_types) - 1)
+            # f.write(f"{samp},{outlier_types[ot]}\n")
+            for outlier_type in outlier_types:
+                f.write(f"{samp},{outlier_type}\n")
         else:
             f.write(f"{samp},\n")
-        idx += 1
+        # idx += 1
 
 
 if __name__ == '__main__':
