@@ -1,7 +1,7 @@
 {
-    "team_name": "testtest",
-    "method_description": "testtesttest",
-    "data_types": "Mesh, segmentation, image or a hybrid",
+    "team_name": "no-fracture-no-cry",
+    "method_description": "mesh pca mahalanobis distance threshold",
+    "data_types": "Mesh, only normals",
     "data_dir": "/work3/rapa/challenge_data/",
     "result_dir": "./challenge_results",
     "challenge_server":  "http://fungi.compute.dtu.dk:8080"

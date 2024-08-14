@@ -162,3 +162,4 @@ cython_debug/
 #.idea/
 
 /challenge_results
+/checkpoints
